@@ -32,13 +32,7 @@ static int __init killd_init(void)
     printk(KERN_INFO "killd: pid %d new state: %#lx\n", pid, ts->state);
     rcu_read_unlock();
 
-    return 0;
-}
-
-static void __exit killd_cleanup(void)
-{
-    printk(KERN_INFO "killd deinit\n");
+    return -1;
 }
 
 module_init(killd_init);
-module_exit(killd_cleanup);
