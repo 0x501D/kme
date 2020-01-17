@@ -22,7 +22,6 @@ static int __init killd_init(void)
 
     rcu_read_lock();
     ts = pid_task(find_pid_ns(pid, &init_pid_ns), PIDTYPE_PID);
-    rcu_read_unlock();
     if (!ts) {
         printk(KERN_INFO "process with pid:%d not found\n", pid);
         return 0;
@@ -31,6 +30,7 @@ static int __init killd_init(void)
     printk(KERN_INFO "killd: pid %d old state: %#lx\n", pid, ts->state);
     ts->state = state;
     printk(KERN_INFO "killd: pid %d new state: %#lx\n", pid, ts->state);
+    rcu_read_unlock();
 
     return 0;
 }
